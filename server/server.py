@@ -3,19 +3,20 @@ import util
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
+
+@app.route("/", methods=["GET", "POST"])
 def home():
     estimated_price = None
+
     if request.method == "POST":
-        # Gather form data
         data = {
             "City": request.form["City"],
             "Province": request.form["Province"],
             "Bedrooms": int(request.form["Bedrooms"]),
             "Bathrooms": int(request.form["Bathrooms"]),
             "Acreage": float(request.form["Acreage"]),
-            "Property Type": request.form["Property_Type"],
-            "Square Footage": float(request.form["Square_Footage"]),
+            "Property Type": request.form["Property Type"],
+            "Square Footage": float(request.form["Square Footage"]),
             "Garage": request.form["Garage"],
             "Parking": request.form["Parking"],
             "Fireplace": request.form["Fireplace"],
@@ -24,25 +25,23 @@ def home():
             "Sewer": request.form["Sewer"],
             "Pool": request.form["Pool"],
             "Garden": request.form["Garden"],
-            "Balcony": request.form["Balcony"]
+            "Balcony": request.form["Balcony"],
         }
 
-        # Predict
         estimated_price = util.get_estimated_price(data)
 
-    return render_template("index.html", estimated_price=estimated_price)
+    return render_template(
+        "index.html",
+        estimated_price=estimated_price,
+        categories=util.get_categories(),
+    )
+
 
 @app.route("/predict_home_price", methods=["POST"])
 def predict_home_price():
     data = request.get_json()
-
     estimated_price = util.get_estimated_price(data)
-
-    response = jsonify({
-        "estimated_price": estimated_price
-    })
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    return response
+    return jsonify({"estimated_price": estimated_price})
 
 
 if __name__ == "__main__":
