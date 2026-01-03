@@ -12,13 +12,13 @@ def load_saved_artifacts():
     print("Loading saved model...")
 
     __model = joblib.load(
-        "D:/Canada-House-Price-Prediction/model/house_price_model.joblib"
+        "model/house_price_model.joblib"
     )
 
     __feature_columns = list(__model.feature_names_in_)
 
     with open(
-        "D:/Canada-House-Price-Prediction/model/categories.json", "r"
+        "model/categories.json", "r"
     ) as f:
         __categories = json.load(f)
 
