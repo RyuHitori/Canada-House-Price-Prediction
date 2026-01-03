@@ -12,7 +12,7 @@ def load_saved_artifacts():
     print("Loading saved model...")
 
     __model = joblib.load(
-        "model/house_price_model.joblib"
+        "model/canada_home_prices_model.joblib"
     )
 
     __feature_columns = list(__model.feature_names_in_)
