@@ -9,7 +9,7 @@ model = joblib.load("model/canada_home_prices_model.joblib")
 with open("model/categories.json", "r") as f:
     categories = json.load(f)
 
-with open("model/data_columns.json", "r") as f:
+with open("model/columns.json", "r") as f:
     data_columns = json.load(f)["data_columns"]
 
 st.title("Canada House Price Prediction")
