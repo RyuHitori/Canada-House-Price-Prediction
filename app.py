@@ -26,7 +26,7 @@ except Exception as e:
 
 try:
     with open(DATA_COLUMNS_PATH, "r") as f:
-        data_columns = json.load(f)["data_columns"]
+        data_columns = json.load(f)["columns"]
 except Exception as e:
     st.error(f"Error loading data_columns.json: {e}")
     st.stop()
